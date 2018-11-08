@@ -11,8 +11,7 @@ import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.Set;
+import java.util.*;
 
 
 public class KonwerterWalut {
@@ -42,8 +41,16 @@ public class KonwerterWalut {
     public String getratesKeysHTML() {
         String output = "";
 
+        List<String> sortedRatesKeys = new ArrayList<>();
+
         for (Object ratesKey : ratesKeys) {
-            output+=String.format("<option>%s</option>\n", ratesKey);
+            sortedRatesKeys.add(ratesKey.toString());
+        }
+
+        Collections.sort(sortedRatesKeys);
+
+        for (String sortedRatesKey : sortedRatesKeys) {
+            output += String.format("<option>%s</option>\n", sortedRatesKey);
         }
         return output;
     }
@@ -55,7 +62,6 @@ public class KonwerterWalut {
 //            http://data.fixer.io/api/2013-12-24?access_key=ce5a3626a3293b9533479c202d8c252f
             URL url = new URL("http://data.fixer.io/api/" + date + "?access_key=ce5a3626a3293b9533479c202d8c252f");
             System.out.println(url.toString());
-//            String data = IOUtils.toString(new URL("http://data.fixer.io/api/latest?access_key=ce5a3626a3293b9533479c202d8c252f"), "UTF-8");
             String data = IOUtils.toString(url, "UTF-8");
 
             JSONObject siteData = (JSONObject) new JSONParser().parse(data);
@@ -80,7 +86,6 @@ public class KonwerterWalut {
             for (Object ratesKey : ratesKeys) {
                 ratesData.put(ratesKey.toString(), (new BigDecimal(rates.get(ratesKey).toString())));
             }
-            System.out.println("USD: " + ratesData.get("USD"));
             if (ratesData.isEmpty())
                 errorGettingData = true;
 
@@ -115,7 +120,6 @@ public class KonwerterWalut {
             output = input.multiply(currencyPairRatio).setScale(4, RoundingMode.HALF_UP).toString();
 
         }
-
 
         return output;
     }

@@ -10,18 +10,14 @@ import java.util.regex.Pattern;
 @WebServlet("/KonwerterWalut")
 public class KonwerterWalutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF-8");
         KonwerterWalut konwerterWalut = new KonwerterWalut();
-        System.out.println(request.getParameter("inputCurrency"));
 
         if (request.getParameter("inputCurrency") != null &&
                 !request.getParameter("inputCurrency").isEmpty()) {
-
 
             if (request.getParameter("inputDate") != null &&
                     !request.getParameter("inputDate").isEmpty()) {
@@ -32,19 +28,22 @@ public class KonwerterWalutServlet extends HttpServlet {
 
                 if (matcher.matches()) {
                     konwerterWalut.setDate(request.getParameter("inputDate").strip().trim());
-
-
                 }
-
-// first run
-
-
             }
-
             konwerterWalut.getData();
+            request.setAttribute("waluty", konwerterWalut.getratesKeysHTML());
+
+            String inputCurrencyString = request.getParameter("inputCurrency").strip().trim().replace(",",".");
+            String inputCurrencyChoiceString = request.getParameter("currencyChoice");
+            String calculatedNewCurrency = konwerterWalut.calculate(inputCurrencyString,inputCurrencyChoiceString);
+
+            request.setAttribute("wynik", calculatedNewCurrency);
             request.getRequestDispatcher("KonwerterWalut.jsp").forward(request, response);
-
-
+        } else {
+            request.setAttribute("wynik", "---");
+            konwerterWalut.getData();
+            request.setAttribute("waluty", konwerterWalut.getratesKeysHTML());
+            request.getRequestDispatcher("KonwerterWalut.jsp").forward(request, response);
         }
     }
 }

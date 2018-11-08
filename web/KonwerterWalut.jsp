@@ -35,7 +35,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="http://localhost:8080/">Home <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
@@ -43,9 +43,9 @@
                     Wybór zadania
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="http://localhost:8080/PrzelicznikMiar.html">Konwerter miar</a>
-                    <a class="dropdown-item" href="http://localhost:8080/ObslugaTekstu.html">Obsługa tekstu</a>
-                    <a class="dropdown-item" href="http://localhost:8080/KonwerterWalut">Konwerter walut</a>
+                    <a class="dropdown-item" href="PrzelicznikMiar.html">Konwerter miar</a>
+                    <a class="dropdown-item" href="ObslugaTekstu.html">Obsługa tekstu</a>
+                    <a class="dropdown-item" href="KonwerterWalut">Konwerter walut</a>
                 </div>
             </li>
         </ul>
@@ -75,18 +75,26 @@
                            aria-describedby="data w formacie yyyy-MM-dd" placeholder="yyyy-MM-dd">
                 </div>
                 <div class="form-group">
+                    <label for="currencyChoice">Wybierz walutę docelową:</label>
                     <select class="form-control" id="currencyChoice" name="currencyChoice">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <%= request.getAttribute("waluty") %>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Przelicz</button>
             </form>
-        </div>
+        <form>
+
+            <div class="form-group">
+                <br>
+                <label for="wynik">Wynik Konwersji:</label>
+                <input id="wynik" class="form-control" type="text" placeholder="<%= request.getAttribute("wynik") %>" readonly>
+            </div>
+        </form>
+
     </div>
+    </div>
+
+</div>
 </div>
 
 
