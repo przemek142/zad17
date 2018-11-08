@@ -24,25 +24,28 @@ public class KonwerterWalut {
 
     public KonwerterWalut(String date) {
         this.date = date;
-        getData();
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public KonwerterWalut(LocalDateTime date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         this.date = date.format(dateTimeFormatter);
-        getData();
     }
 
     public KonwerterWalut() {
-        getData();
+
     }
 
-    public Set getFixerKeys() {
-        return fixerKeys;
-    }
+    public String getratesKeysHTML() {
+        String output = "";
 
-    public Set getRatesKeys() {
-        return ratesKeys;
+        for (Object ratesKey : ratesKeys) {
+            output+=String.format("<option>%s</option>\n", ratesKey);
+        }
+        return output;
     }
 
 
@@ -77,7 +80,7 @@ public class KonwerterWalut {
             for (Object ratesKey : ratesKeys) {
                 ratesData.put(ratesKey.toString(), (new BigDecimal(rates.get(ratesKey).toString())));
             }
-
+            System.out.println("USD: " + ratesData.get("USD"));
             if (ratesData.isEmpty())
                 errorGettingData = true;
 
@@ -108,8 +111,8 @@ public class KonwerterWalut {
         if (!errorGettingData && !error) {
             BigDecimal outpuCurrencyIndex = ratesData.get(outputCurrencyString);
             BigDecimal PLN = ratesData.get("PLN");
-            BigDecimal currencyPairRatio = outpuCurrencyIndex.divide(PLN,8, RoundingMode.HALF_UP);
-            output=input.multiply(currencyPairRatio).setScale(4,RoundingMode.HALF_UP ).toString();
+            BigDecimal currencyPairRatio = outpuCurrencyIndex.divide(PLN, 8, RoundingMode.HALF_UP);
+            output = input.multiply(currencyPairRatio).setScale(4, RoundingMode.HALF_UP).toString();
 
         }
 

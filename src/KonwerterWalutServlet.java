@@ -4,6 +4,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @WebServlet("/KonwerterWalut")
 public class KonwerterWalutServlet extends HttpServlet {
@@ -14,8 +16,35 @@ public class KonwerterWalutServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF-8");
-        if (request.getParameter("inputCurreny")==null){
+        KonwerterWalut konwerterWalut = new KonwerterWalut();
+        System.out.println(request.getParameter("inputCurrency"));
+
+        if (request.getParameter("inputCurrency") != null &&
+                !request.getParameter("inputCurrency").isEmpty()) {
+
+
+            if (request.getParameter("inputDate") != null &&
+                    !request.getParameter("inputDate").isEmpty()) {
+
+                Pattern patternDate = Pattern.compile("^[1|2][0|9][0|1|9][0-9]-[0|1][0-9]-[0|1|2|3][0-9]$");
+
+                Matcher matcher = patternDate.matcher(request.getParameter("inputDate").strip().trim());
+
+                if (matcher.matches()) {
+                    konwerterWalut.setDate(request.getParameter("inputDate").strip().trim());
+
+
+                }
+
+// first run
+
+
+            }
+
+            konwerterWalut.getData();
             request.getRequestDispatcher("KonwerterWalut.jsp").forward(request, response);
+
+
         }
     }
 }

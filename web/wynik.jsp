@@ -42,7 +42,7 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="http://localhost:8080/PrzelicznikMiar.html">Konwerter miar</a>
                     <a class="dropdown-item" href="http://localhost:8080/ObslugaTekstu.html">Obsługa tekstu</a>
-                    <a class="dropdown-item" href="http://localhost:8080/KonwerterWalut.html">Konwerter walut</a>
+                    <a class="dropdown-item" href="http://localhost:8080/KonwerterWalut">Konwerter walut</a>
                 </div>
             </li>
         </ul>
@@ -50,8 +50,10 @@
     </div>
 </nav>
 <div class="jumbotron text-center">
-    <h1><%= request.getAttribute("nazwa") %></h1>
-    <p>Zadanie domowe <%= request.getAttribute("numer") %></p>
+    <h1><%= request.getAttribute("nazwa") %>
+    </h1>
+    <p>Zadanie domowe <%= request.getAttribute("numer") %>
+    </p>
 </div>
 <div class="container">
     <div class="row">
