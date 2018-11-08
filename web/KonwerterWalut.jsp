@@ -1,3 +1,11 @@
+<%--
+  Created by IntelliJ IDEA.
+  User: przemo
+  Date: 08.11.2018
+  Time: 12:17
+  To change this template use File | Settings | File Templates.
+--%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,17 +36,27 @@
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="http://localhost:8080/PrzelicznikMiar.html">Konwerter miar</a>
                     <a class="dropdown-item" href="http://localhost:8080/ObslugaTekstu.html">Obsługa tekstu</a>
-                    <a class="dropdown-item" href="http://localhost:8080/KonwerterWalut.html">Konwerter walut</a>
+                    <a class="dropdown-item" href="http://localhost:8080/KonwerterWalut">Konwerter walut</a>
                 </div>
             </li>
         </ul>
 
     </div>
 </nav>
+
+
 <div class="jumbotron text-center">
     <h1>Konwerter walut</h1>
     <p>Zadanie domowe 17.3</p>
 </div>
+
+
+
+
+
+
+
+
 
 <footer class="footer">
     <div class="container">
